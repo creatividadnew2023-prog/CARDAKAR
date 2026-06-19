@@ -2102,4 +2102,115 @@ document.addEventListener('DOMContentLoaded', () => {
             togglePlay();
         });
     });
+
+    // ==========================================================================
+    // Registration Type Selector (Camionero / Empresa)
+    // ==========================================================================
+    const panelCamionero = document.getElementById('form-panel-camionero');
+    const panelEmpresa   = document.getElementById('form-panel-empresa');
+    const btnTipoCamionero = document.getElementById('btn-tipo-camionero');
+    const btnTipoEmpresa   = document.getElementById('btn-tipo-empresa');
+
+    window.switchRegType = function(type) {
+        if (type === 'camionero') {
+            panelCamionero && (panelCamionero.style.display = '');
+            panelEmpresa   && (panelEmpresa.style.display   = 'none');
+            btnTipoCamionero && btnTipoCamionero.classList.add('active');
+            btnTipoEmpresa   && btnTipoEmpresa.classList.remove('active');
+        } else {
+            panelCamionero && (panelCamionero.style.display = 'none');
+            panelEmpresa   && (panelEmpresa.style.display   = '');
+            btnTipoEmpresa   && btnTipoEmpresa.classList.add('active');
+            btnTipoCamionero && btnTipoCamionero.classList.remove('active');
+        }
+        document.getElementById('onboarding-form-section')
+            ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    // ==========================================================================
+    // Empresa Form — Multi-Step Navigation
+    // ==========================================================================
+    const empresaForm = document.getElementById('empresa-form');
+    let empresaStep = 1;
+
+    function goToEmpStep(step) {
+        document.querySelectorAll('#empresa-form .form-step-panel-emp').forEach(p => {
+            p.classList.remove('active');
+            if (parseInt(p.getAttribute('data-step')) === step) p.classList.add('active');
+        });
+        empresaStep = step;
+        document.getElementById('onboarding-form-section')
+            ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function validateEmpStep(step) {
+        const panel = document.querySelector(`#empresa-form .form-step-panel-emp[data-step="${step}"]`);
+        if (!panel) return false;
+        let valid = true;
+        panel.querySelectorAll('input[required], select[required]').forEach(el => {
+            if (!el.reportValidity()) valid = false;
+        });
+        return valid;
+    }
+
+    document.querySelectorAll('.next-step-btn-emp').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (validateEmpStep(empresaStep)) goToEmpStep(empresaStep + 1);
+        });
+    });
+
+    document.querySelectorAll('.prev-step-btn-emp').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (empresaStep > 1) goToEmpStep(empresaStep - 1);
+        });
+    });
+
+    // ==========================================================================
+    // Empresa Form — Submit
+    // ==========================================================================
+    if (empresaForm) {
+        empresaForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const loadingOverlayEl = document.getElementById('form-loading-overlay');
+            const successOverlayEl = document.getElementById('form-success-overlay');
+            if (loadingOverlayEl) loadingOverlayEl.style.display = 'flex';
+
+            const rifType = document.getElementById('emp-rif-type')?.value || 'J';
+            const rifNum  = document.getElementById('emp-rif')?.value.trim() || '';
+            const tiposChecked = Array.from(
+                document.querySelectorAll('input[name="tipos_unidad[]"]:checked')
+            ).map(cb => cb.value);
+
+            const payload = {
+                tipo_registro: 'empresa',
+                rif: rifType + '-' + rifNum,
+                nombre_empresa: document.getElementById('emp-nombre')?.value.trim(),
+                nombre_contacto: document.getElementById('emp-contacto')?.value.trim(),
+                phone: document.getElementById('emp-phone')?.value.trim(),
+                email: document.getElementById('emp-email')?.value.trim(),
+                direccion: document.getElementById('emp-direccion')?.value.trim(),
+                num_unidades: document.getElementById('emp-num-unidades')?.value,
+                zona_operacion: document.getElementById('emp-zona')?.value,
+                tipos_unidad: tiposChecked,
+                observaciones: document.getElementById('emp-observaciones')?.value.trim(),
+                registered_at: new Date().toISOString()
+            };
+
+            try {
+                await fetch('/api/register-empresa', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (_) {}
+
+            if (loadingOverlayEl) loadingOverlayEl.style.display = 'none';
+            const titleEl = document.getElementById('success-title');
+            const msgEl   = document.getElementById('success-msg');
+            if (titleEl) titleEl.textContent = '¡Empresa Registrada!';
+            if (msgEl) msgEl.textContent = (payload.nombre_empresa || 'Tu empresa') + ' ha sido pre-registrada en la red Cardakar.';
+            if (successOverlayEl) successOverlayEl.style.display = 'flex';
+        });
+    }
+
 });
