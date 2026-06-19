@@ -493,10 +493,40 @@
         <div class="container">
             <div class="section-header">
                 <span class="badge">Registro Oficial</span>
-                <h2 class="section-title">Registro Rápido de <span class="highlight">Choferes</span></h2>
-                <p class="section-subtitle">Regístrate en menos de 30 segundos con tus datos de contacto básicos y luego decide si deseas certificar tu unidad.</p>
+                <h2 class="section-title">Únete a la Red <span class="highlight">Cardakar</span></h2>
+                <p class="section-subtitle">Selecciona tu perfil y completa tu registro en minutos. Sin papeleo, sin esperas.</p>
             </div>
-                
+
+            <!-- Selector de Tipo de Registro -->
+            <div class="reg-type-selector">
+                <button type="button" class="reg-type-btn active" id="btn-tipo-camionero" onclick="switchRegType('camionero')">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="1" y="3" width="15" height="13" rx="1"></rect>
+                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                    </svg>
+                    <div class="reg-type-text">
+                        <strong>Camionero Independiente</strong>
+                        <span>Conductor con un solo vehículo</span>
+                    </div>
+                </button>
+                <button type="button" class="reg-type-btn" id="btn-tipo-empresa" onclick="switchRegType('empresa')">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="7" width="20" height="14" rx="2"></rect>
+                        <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path>
+                        <line x1="12" y1="12" x2="12" y2="16"></line>
+                        <line x1="10" y1="14" x2="14" y2="14"></line>
+                    </svg>
+                    <div class="reg-type-text">
+                        <strong>Empresa de Transporte</strong>
+                        <span>Flota de múltiples vehículos</span>
+                    </div>
+                </button>
+            </div>
+
+            <!-- ===== PANEL: CAMIONERO INDEPENDIENTE ===== -->
+            <div id="form-panel-camionero" class="reg-form-panel">
                 <!-- Form Element -->
                 <form id="kyc-multi-step-form" class="kyc-form">
                     <!-- STEP 1: PRE-REGISTRO / IDENTIDAD -->
@@ -551,39 +581,26 @@
                     
                     <!-- STEP 2: LA UNIDAD Y TELEMETRÍA -->
                     <div class="form-step-panel" data-step="2">
-                        <h3>Paso 2: Datos de la Unidad y Telemetría</h3>
-                        <p class="panel-desc">Especifica las características de tus vehículos y tu método de rastreo GPS.</p>
-                        
-                        <label>Vehículos que conduce (puede registrar varios):</label>
-                        <div id="vehicles-container" style="margin-top: 8px;">
-                            <div class="vehicle-row" data-index="0">
-                                <div class="form-group">
-                                    <label>Tipo de Vehículo:</label>
-                                    <select class="kyc-vehicle-type" name="vehicle_type[]" required>
-                                        <option value="" disabled selected>Selecciona una opción</option>
-                                        <option value="NPR">NPR / Tritón</option>
-                                        <option value="Gandola">Gandola (Chuto + Batea)</option>
-                                        <option value="Cava Cuarto">Cava Cuarto / Furgón</option>
-                                        <option value="Volqueta">Volqueta</option>
-                                        <option value="Plataforma">Plataforma</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Placa del Vehículo:</label>
-                                    <div class="input-with-delete">
-                                        <input type="text" class="kyc-plate" name="plate[]" placeholder="Ej. A12B34C" required>
-                                        <button type="button" class="btn-delete-vehicle" style="display: none;" title="Eliminar vehículo">
-                                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                                <polyline points="3 6 5 6 21 6"></polyline>
-                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
+                        <h3>Paso 2: Tu Vehículo y GPS</h3>
+                        <p class="panel-desc">Indica el tipo de tu unidad y tu método de rastreo GPS.</p>
+
+                        <div class="form-group-grid">
+                            <div class="form-group">
+                                <label for="kyc-vehicle-type-single">Tipo de Vehículo:</label>
+                                <select id="kyc-vehicle-type-single" class="kyc-vehicle-type" name="vehicle_type[]" required>
+                                    <option value="" disabled selected>Selecciona una opción</option>
+                                    <option value="NPR">NPR / Tritón</option>
+                                    <option value="Gandola">Gandola (Chuto + Batea)</option>
+                                    <option value="Cava Cuarto">Cava Cuarto / Furgón</option>
+                                    <option value="Volqueta">Volqueta</option>
+                                    <option value="Plataforma">Plataforma</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="kyc-plate-single">Placa del Vehículo:</label>
+                                <input type="text" id="kyc-plate-single" class="kyc-plate" name="plate[]" placeholder="Ej. A12B34C" required>
                             </div>
                         </div>
-                        
-                        <button type="button" id="btn-add-vehicle" class="btn btn-tertiary" style="margin-top: 10px; margin-bottom: 24px; padding: 8px 16px; border: 1px dashed var(--border-color); border-radius: 8px;">+ Agregar otro vehículo</button>
                         
                         <div class="form-group-full" style="border-top: 1px solid var(--border-color); padding-top: 24px;">
                             <label>¿Cuenta con un dispositivo GPS físico homologable instalado en su camión?</label>
@@ -629,6 +646,113 @@
                     </div>
                 </form>
                 
+            </div><!-- /form-panel-camionero -->
+
+            <!-- ===== PANEL: EMPRESA DE TRANSPORTE ===== -->
+            <div id="form-panel-empresa" class="reg-form-panel" style="display:none;">
+                <form id="empresa-form" class="kyc-form">
+                    <!-- STEP 1: DATOS DE LA EMPRESA -->
+                    <div class="form-step-panel-emp active" data-step="1">
+                        <h3>Paso 1: Datos de la Empresa</h3>
+                        <p class="panel-desc">Ingresa el RIF y los datos de contacto de tu empresa transportista.</p>
+
+                        <div class="form-group-grid">
+                            <div class="form-group">
+                                <label for="emp-rif">RIF de la Empresa:</label>
+                                <div class="input-with-button">
+                                    <select id="emp-rif-type" style="width: 70px; height: 42px; box-sizing: border-box; flex-shrink: 0; background-color: #0c1322; border: 1px solid var(--border-color); color: var(--text-main); border-radius: 6px; padding: 0 8px; font-family: var(--font-heading); font-weight: 600; outline: none; cursor: pointer;">
+                                        <option value="J" selected>J</option>
+                                        <option value="G">G</option>
+                                        <option value="V">V</option>
+                                    </select>
+                                    <input type="text" id="emp-rif" name="rif" placeholder="Ej. 12345678-9" required style="flex-grow: 1;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="emp-nombre">Razón Social / Nombre de la Empresa:</label>
+                                <input type="text" id="emp-nombre" name="nombre_empresa" placeholder="Ej. Transportes Rápidos C.A." required>
+                            </div>
+                        </div>
+
+                        <div class="form-group-grid" style="margin-top: 16px;">
+                            <div class="form-group">
+                                <label for="emp-contacto">Nombre del Responsable:</label>
+                                <input type="text" id="emp-contacto" name="nombre_contacto" placeholder="Ej. Juan Pérez" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emp-phone">Teléfono de Contacto (WhatsApp):</label>
+                                <input type="tel" id="emp-phone" name="phone" placeholder="Ej. +58 412 1234567" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group-full" style="margin-top: 16px;">
+                            <label for="emp-email">Correo Electrónico Corporativo:</label>
+                            <input type="email" id="emp-email" name="email" placeholder="Ej. contacto@empresa.com" required>
+                        </div>
+
+                        <div class="form-group-full" style="margin-top: 16px;">
+                            <label for="emp-direccion">Dirección de la Empresa:</label>
+                            <input type="text" id="emp-direccion" name="direccion" placeholder="Ej. Zona Industrial, Valencia, Carabobo" required>
+                        </div>
+
+                        <div class="form-navigation" style="margin-top: 20px; display: flex; gap: 16px;">
+                            <button type="button" class="btn btn-primary next-step-btn-emp" style="width: 100%;">Siguiente Paso →</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: INFORMACIÓN DE LA FLOTA -->
+                    <div class="form-step-panel-emp" data-step="2">
+                        <h3>Paso 2: Información de la Flota</h3>
+                        <p class="panel-desc">Cuéntanos sobre tu flota para conectarte con los fletes adecuados.</p>
+
+                        <div class="form-group-grid">
+                            <div class="form-group">
+                                <label for="emp-num-unidades">Número Total de Unidades:</label>
+                                <input type="number" id="emp-num-unidades" name="num_unidades" placeholder="Ej. 5" min="2" max="500" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emp-zona">Zona de Operación Principal:</label>
+                                <select id="emp-zona" name="zona_operacion" required>
+                                    <option value="" disabled selected>Selecciona un estado</option>
+                                    <option value="Caracas">Distrito Capital</option>
+                                    <option value="Aragua">Aragua</option>
+                                    <option value="Carabobo">Carabobo</option>
+                                    <option value="Lara">Lara</option>
+                                    <option value="Zulia">Zulia</option>
+                                    <option value="Anzoategui">Anzoátegui</option>
+                                    <option value="Bolivar">Bolívar</option>
+                                    <option value="Miranda">Miranda</option>
+                                    <option value="Nacional">Operación Nacional</option>
+                                    <option value="Otro">Otro Estado</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group-full" style="margin-top: 20px;">
+                            <label>Tipos de Unidades en la Flota:</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-label"><input type="checkbox" name="tipos_unidad[]" value="NPR"> NPR / Tritón</label>
+                                <label class="checkbox-label"><input type="checkbox" name="tipos_unidad[]" value="Gandola"> Gandola (Chuto + Batea)</label>
+                                <label class="checkbox-label"><input type="checkbox" name="tipos_unidad[]" value="Cava"> Cava / Furgón</label>
+                                <label class="checkbox-label"><input type="checkbox" name="tipos_unidad[]" value="Volqueta"> Volqueta</label>
+                                <label class="checkbox-label"><input type="checkbox" name="tipos_unidad[]" value="Plataforma"> Plataforma / Lowboy</label>
+                                <label class="checkbox-label"><input type="checkbox" name="tipos_unidad[]" value="Cisterna"> Cisterna</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group-full" style="margin-top: 16px;">
+                            <label for="emp-observaciones">Observaciones / Servicios Especiales (opcional):</label>
+                            <textarea id="emp-observaciones" name="observaciones" placeholder="Ej. Especialistas en carga refrigerada, flota con GPS homologado..." style="width: 100%; min-height: 80px; background-color: #0c1322; border: 1px solid var(--border-color); color: var(--text-main); border-radius: 8px; padding: 12px; font-family: var(--font-body); resize: vertical; box-sizing: border-box; outline: none;"></textarea>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-secondary prev-step-btn-emp">← Atrás</button>
+                            <button type="submit" class="btn btn-primary btn-glow" id="submit-empresa-btn">Registrar Empresa</button>
+                        </div>
+                    </div>
+                </form>
+            </div><!-- /form-panel-empresa -->
+
                 <!-- Success State Overlay -->
                 <div class="form-success-overlay" id="form-success-overlay">
                     <div class="success-card">
@@ -638,14 +762,14 @@
                                 <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
                             </svg>
                         </div>
-                        <h2>¡Pre-registro Exitoso!</h2>
-                        <p>Tus datos básicos han sido registrados en la plataforma de Cardakar Logistics.</p>
-                        
+                        <h2 id="success-title">¡Registro Exitoso!</h2>
+                        <p id="success-msg">Tus datos han sido registrados en la plataforma de Cardakar Logistics.</p>
+
                         <div class="success-details" style="background-color: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 16px 20px; border-radius: 8px; text-align: left; font-size: 0.875rem;">
-                            <p><strong>Estatus actual:</strong> Pre-Inscrito (Falta Documentación).</p>
-                            <p style="margin-top: 8px; color: var(--text-muted);">Para finalizar tu afiliación y poder recibir fletes, ve a la pestaña <strong>"Cédula Digital"</strong> en el menú superior para cargar tus documentos de verificación (Licencia, RCV, etc.).</p>
+                            <p><strong>Estatus actual:</strong> Pre-Inscrito (Pendiente de revisión).</p>
+                            <p style="margin-top: 8px; color: var(--text-muted);">Nuestro equipo revisará tu solicitud y se pondrá en contacto a la brevedad para coordinar la incorporación a la red Cardakar.</p>
                         </div>
-                        
+
                         <button type="button" class="btn btn-secondary" id="close-success-btn">Entendido</button>
                     </div>
                 </div>
@@ -655,7 +779,7 @@
                     <div class="loading-spinner-container">
                         <div class="loading-spinner"></div>
                         <p>Procesando registro en el servidor...</p>
-                        <p class="loading-sub">Enviando carga útil JSON al Webhook de n8n</p>
+                        <p class="loading-sub">Enviando datos al sistema Cardakar</p>
                     </div>
                 </div>
             </div>
