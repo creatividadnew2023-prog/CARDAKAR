@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cardakar Logistics - El Renacimiento Digital del Transporte B2B en Venezuela. Únete a la red de choferes más grande, con pagos garantizados, cargas de retorno y mapa de combustible.">
+    <title>Cardakar Logistics | Captación y Onboarding de Choferes</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS for Map Tracking -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="landing-view-wrapper">
+        <!-- Header / Navbar -->
+        <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo-link">
+                <div class="logo-container" style="height: 45px; display: flex; align-items: center;">
+                    <!-- SVG Logo Modernized representing CDK and Inversiones Cardakar C.A. -->
+                    <svg class="logo-svg" viewBox="0 0 240 60" width="180" height="45" xmlns="http://www.w3.org/2000/svg">
+                        <g transform="translate(5, 5)">
+                            <!-- Road Path cutting through C and D -->
+                            <path d="M 5,38 L 85,38 L 80,48 L 5,48 Z" fill="#ffffff" opacity="0.1" />
+                            <path d="M 10,43 L 30,43" stroke="#ffffff" stroke-width="2" stroke-dasharray="4,4" opacity="0.8" />
+                            <path d="M 40,43 L 75,43" stroke="#ffffff" stroke-width="2" stroke-dasharray="4,4" opacity="0.8" />
+
+                            <!-- Letter C (Blue) -->
+                            <path d="M 38,10 L 15,10 C 10,10 7,13 5,18 L 1,32 C -1,37 1,42 6,42 L 31,42 L 35,32 L 14,32 L 20,18 L 34,18 Z" fill="#1a508b" />
+                            
+                            <!-- Letter D (Blue) -->
+                            <path d="M 41,10 L 65,10 C 72,10 77,14 75,21 L 72,31 C 70,38 64,42 57,42 L 32,42 Z M 44,32 L 54,32 C 58,32 60,30 61,27 L 63,20 C 64,17 62,16 59,16 L 49,16 Z" fill="#1a508b" />
+                            
+                            <!-- Letter K (Orange Arrow < ) -->
+                            <path d="M 98,10 L 86,26 L 98,42 L 85,42 L 74,26 L 85,10 Z" fill="#e07a2c" />
+                            
+                            <!-- Text below CDK: INVERSIONES -->
+                            <text x="2" y="52" fill="#daa520" font-family="'Outfit', sans-serif" font-size="7.5" font-weight="700" letter-spacing="1.2">INVERSIONES</text>
+                            <!-- Text next: CARDAKAR -->
+                            <text x="73" y="52" fill="#1a508b" font-family="'Outfit', sans-serif" font-size="10" font-weight="800" letter-spacing="0.5">CARDA<tspan fill="#e07a2c">KAR</tspan> <tspan fill="#667085" font-size="7">C.A.</tspan></text>
+                        </g>
+                    </svg>
+                    <img class="logo-img" src="" alt="Cardakar Logo" style="display: none; height: 45px; max-width: 180px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));">
+                </div>
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="#beneficios" class="nav-item">Beneficios</a>
+                <a href="#proceso" class="nav-item">¿Cómo funciona?</a>
+                <a href="#onboarding-form-section" class="nav-item">Certificar Unidad</a>
+                <a href="#combustible" class="nav-item">Mapa de Combustible</a>
+                <a href="#faqs" class="nav-item">Preguntas Frecuentes</a>
+            </nav>
+            
+            <a href="#onboarding-form-section" class="btn btn-secondary nav-cta">
+                <span>Certificar mi Unidad</span>
+            </a>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-toggle" aria-label="Abrir menú">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    <span class="badge-text">Fase 1: Onboarding de Choferes Activo</span>
+                </div>
+                <h1 class="hero-title">Gana más, cobra seguro.<br>Únete a la red <span class="highlight">Cardakar</span></h1>
+                <p class="hero-subtitle">Proyectamos la tradición operativa hacia una infraestructura FreightTech moderna. Registra tu unidad en minutos, asegura tus fletes y optimiza tus retornos.</p>
+                
+                <div class="hero-actions">
+                    <a href="#onboarding-form-section" class="btn btn-primary btn-glow">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                        <span>Certificar mi Unidad</span>
+                    </a>
+                    <a href="#beneficios" class="btn btn-tertiary">
+                        <span>Conocer beneficios</span>
+                    </a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Pagos Asegurados</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">0%</span>
+                        <span class="stat-label">Kilómetros Vacíos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Soporte Operativo</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="image-wrapper">
+                    <img src="truck_hero.jpg" alt="Cardakar Logistics Semi-truck" class="hero-img">
+                    <div class="glow-box"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition Section -->
+    <section id="beneficios" class="section benefits-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">¿Por qué ser un <span class="highlight">Transportista Cardakar</span>?</h2>
+                <p class="section-subtitle">Diseñamos una plataforma pensada en la rentabilidad, seguridad y estabilidad de tu negocio en la carretera.</p>
+            </div>
+            
+            <div class="grid grid-4">
+                <!-- Card 1 -->
+                <div class="benefit-card">
+                    <div class="card-icon-container">
+                        <!-- Dollar Shield Icon -->
+                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M12 2a5 5 0 0 0-5 5v4h10V7a5 5 0 0 0-5-5z"></path>
+                            <circle cx="12" cy="16" r="1"></circle>
+                        </svg>
+                    </div>
+                    <h3>Pago de Flete Asegurado</h3>
+                    <p>El pago de tu flete se realiza de forma garantizada tras la entrega del manifiesto de carga firmado y sellado por el destinatario, y el envío de la foto digital que certifique el envío de la documentación física correspondiente a nuestra sede principal.</p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="benefit-card">
+                    <div class="card-icon-container">
+                        <!-- Loop Arrows Icon -->
+                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                        </svg>
+                    </div>
+                    <h3>Cargas de Retorno</h3>
+                    <p>Maximiza tu rentabilidad reduciendo los retornos vacíos. Nuestro sistema te enlaza de manera inteligente con cargas programadas antes de que llegues a tu destino.</p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="benefit-card">
+                    <div class="card-icon-container">
+                        <!-- Flame / Map Pin Icon -->
+                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <h3>Combustible en Tiempo Real</h3>
+                    <p>Accede de forma nativa a nuestro mapa colaborativo. Choferes activos reportan la disponibilidad real de Diésel/Gasolina con verificación GPS algorítmica.</p>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="benefit-card">
+                    <div class="card-icon-container">
+                        <!-- Award Icon -->
+                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="8" r="7"></circle>
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Soporte e Identidad</h3>
+                    <p>Pertenecer a Cardakar te da respaldo institucional ante clientes transnacionales. Además, contarás con soporte en ruta y monitoreo constante por geocercas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- B2B Corporate Value Proposition Section -->
+    <section id="corporativo-b2b" class="section b2b-corporate-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge badge-accent">Cardakar para Empresas</span>
+                <h2 class="section-title">Garantía y Trazabilidad sin Riesgos</h2>
+                <p class="section-subtitle">Una infraestructura FreightTech confiable para los generadores de carga en Venezuela. Conecta con transportistas verificados y controla tus despachos.</p>
+            </div>
+            
+            <div class="grid grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 50px;">
+                <div class="b2b-corporate-text">
+                    <h3 style="font-family: var(--font-heading); font-size: 1.8rem; color: var(--text-main); margin-bottom: 24px; font-weight: 700; line-height: 1.3;">La Solución Corporativa a los Cuellos de Botella del Transporte Terrestre</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">Cardakar actúa como un broker tecnológico de confianza que elimina la incertidumbre operativa en el ecosistema logístico venezolano. Reducimos el papeleo manual, garantizamos el cumplimiento legal y brindamos visibilidad de extremo a extremo.</p>
+                    
+                    <div class="b2b-features-list" style="display: flex; flex-direction: column; gap: 20px;">
+                        <!-- Feature 1 -->
+                        <div class="b2b-feature-item" style="display: flex; gap: 16px;">
+                            <div class="feature-icon-wrapper" style="width: 48px; height: 48px; background-color: rgba(224, 122, 44, 0.1); border: 1px solid rgba(224, 122, 44, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--color-orange);">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 style="font-family: var(--font-heading); color: var(--text-main); font-size: 1.05rem; font-weight: 600; margin-bottom: 4px;">Choferes Certificados KYC</h4>
+                                <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">Auditoría rigurosa de antecedentes penales, licencia de 5ta, RIF y verificación en vivo vía WhatsApp. Contrata con la tranquilidad de saber quién conduce.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Feature 2 -->
+                        <div class="b2b-feature-item" style="display: flex; gap: 16px;">
+                            <div class="feature-icon-wrapper" style="width: 48px; height: 48px; background-color: rgba(224, 122, 44, 0.1); border: 1px solid rgba(224, 122, 44, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--color-orange);">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 style="font-family: var(--font-heading); color: var(--text-main); font-size: 1.05rem; font-weight: 600; margin-bottom: 4px;">Tracking GPS con Privacidad (Geocercas)</h4>
+                                <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">Telemetría activa durante el tránsito que se apaga automáticamente mediante geocercas al entregar, eliminando la fricción de privacidad con los transportistas.</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature 3 -->
+                        <div class="b2b-feature-item" style="display: flex; gap: 16px;">
+                            <div class="feature-icon-wrapper" style="width: 48px; height: 48px; background-color: rgba(224, 122, 44, 0.1); border: 1px solid rgba(224, 122, 44, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--color-orange);">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 12h-6l-3 9L9 3l-3 9H2"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 style="font-family: var(--font-heading); color: var(--text-main); font-size: 1.05rem; font-weight: 600; margin-bottom: 4px;">Resiliencia Celular (Store-and-Forward)</h4>
+                                <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">Mitigamos las zonas sin cobertura celular en Venezuela almacenando coordenadas localmente en el móvil para transmitirlas apenas vuelva la señal.</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature 4 -->
+                        <div class="b2b-feature-item" style="display: flex; gap: 16px;">
+                            <div class="feature-icon-wrapper" style="width: 48px; height: 48px; background-color: rgba(224, 122, 44, 0.1); border: 1px solid rgba(224, 122, 44, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--color-orange);">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    <polyline points="10 9 9 9 8 9"></polyline>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 style="font-family: var(--font-heading); color: var(--text-main); font-size: 1.05rem; font-weight: 600; margin-bottom: 4px;">Manifiesto de Entrega para ERP</h4>
+                                <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">Descarga el manifiesto de entrega digitalizado y firmado con el historial de telemetría. Importación directa a tus sistemas SAP, Profit o similares.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="b2b-actions" style="margin-top: 35px; display: flex; gap: 16px;">
+                        <button type="button" id="btn-goto-b2b-demo" class="btn btn-primary btn-glow">
+                            <span>Probar Demo Portal B2B</span>
+                        </button>
+                        <a href="https://wa.me/584120000000?text=Hola,%20quiero%20información%20sobre%20los%20servicios%20B2B%20de%20Cardakar" target="_blank" class="btn btn-tertiary" style="border: 1px solid var(--border-color);">
+                            <span>Contactar Especialista</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Interactive Preview Mockup -->
+                <div class="b2b-corporate-visual" style="position: relative; border-radius: 12px; border: 1px solid var(--border-color); background-color: #080d1a; overflow: hidden; padding: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="display: inline-block; width: 10px; height: 10px; background-color: var(--color-orange); border-radius: 50%; animation: beacon 2s infinite;"></span>
+                            <span style="font-family: var(--font-heading); font-size: 0.875rem; font-weight: 600; color: var(--text-main);">Visibilidad B2B - Panel Activo</span>
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">Viaje #V-9842</span>
+                    </div>
+                    
+                    <!-- Simulated Map Graphic -->
+                    <div style="height: 180px; background-color: #0c1322; border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                        <!-- Abstract road lines vector representation -->
+                        <svg viewBox="0 0 400 180" width="100%" height="100%" style="opacity: 0.4;">
+                            <path d="M -20,90 C 100,50 150,140 250,70 C 350,10 380,110 420,90" fill="none" stroke="#1d2f4d" stroke-width="4" />
+                            <path d="M -20,90 C 100,50 150,140 250,70 C 350,10 380,110 420,90" fill="none" stroke="var(--color-orange)" stroke-width="3" stroke-dasharray="6,6" />
+                            <!-- Point A -->
+                            <circle cx="50" cy="78" r="6" fill="#10b981" />
+                            <text x="40" y="65" fill="#10b981" font-size="9" font-family="sans-serif">Caracas</text>
+                            <!-- Point B -->
+                            <circle cx="320" cy="38" r="6" fill="#ef4444" />
+                            <text x="310" y="25" fill="#ef4444" font-size="9" font-family="sans-serif">Barquisimeto</text>
+                            <!-- Moving truck -->
+                            <g transform="translate(195, 96)">
+                                <circle cx="0" cy="0" r="12" fill="var(--color-secondary)" opacity="0.3" style="animation: beacon 2s infinite;" />
+                                <circle cx="0" cy="0" r="5" fill="var(--color-secondary)" />
+                            </g>
+                        </svg>
+                        <div style="position: absolute; bottom: 10px; right: 10px; background-color: rgba(8, 13, 26, 0.85); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; display: flex; gap: 8px; align-items: center;">
+                            <span style="color: var(--text-main); font-weight: 600;">E/S Bohío:</span>
+                            <span style="color: #10b981; font-weight: bold;">Diésel Disponible</span>
+                        </div>
+                    </div>
+
+                    <!-- Mini details -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.75rem;">
+                        <div style="background-color: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 6px;">
+                            <span style="display: block; color: var(--text-muted); margin-bottom: 2px;">Transportista</span>
+                            <strong style="color: var(--text-main); font-size: 0.8125rem;">Juan Carlos Pérez</strong>
+                        </div>
+                        <div style="background-color: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 6px;">
+                            <span style="display: block; color: var(--text-muted); margin-bottom: 2px;">Unidad y Placa</span>
+                            <strong style="color: var(--text-main); font-size: 0.8125rem;">Gandola / A12B34C</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Onboarding Flow Section -->
+    <section id="proceso" class="section process-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">El Proceso de <span class="highlight">Onboarding Automatizado</span></h2>
+                <p class="section-subtitle">Realiza tu proceso de validación KYC en minutos de forma 100% digital a través de nuestro asistente inteligente en WhatsApp.</p>
+            </div>
+            
+            <div class="timeline">
+                <!-- Step 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-number">01</div>
+                    <div class="timeline-content">
+                        <h3>Inicia la conversación</h3>
+                        <p>Haz clic en nuestro enlace y envía un mensaje. Nuestro asistente virtual llamado <strong>"Viajes"</strong> te responderá para darte la bienvenida y guiarte paso a paso.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-number">02</div>
+                    <div class="timeline-content">
+                        <h3>Sube tus documentos</h3>
+                        <p>Envía fotos legibles de tu Cédula de Identidad, Licencia de Conducir vigente y la póliza de seguro del vehículo.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-number">03</div>
+                    <div class="timeline-content">
+                        <h3>Verificación Inteligente "Viajes"</h3>
+                        <p>Nuestro asistente virtual procesa las fotos de tus documentos de manera inteligente, validando los datos en tiempo real para agilizar tu ingreso a la plataforma.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-number">04</div>
+                    <div class="timeline-content">
+                        <h3>¡Camión Aprobado!</h3>
+                        <p>Una vez aprobado, recibes tu acreditación digital como "Transportista Cardakar" y tendrás acceso prioritario a la cartelera de cargas (Load Board).</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="process-cta">
+                <a href="https://wa.me/584120000000?text=Hola,%20quiero%20registrarme%20como%20chofer%20en%20Cardakar" target="_blank" class="btn btn-primary btn-glow">
+                    <span>Iniciar Onboarding en WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Showcase Section (Banners & Videos) -->
+    <section id="media-showcase" class="section media-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge">Multimedia</span>
+                <h2 class="section-title">Cardakar en la <span class="highlight">Carretera</span></h2>
+                <p class="section-subtitle">Conoce los beneficios y mira el funcionamiento real de nuestra red logística de transporte de carga pesada en Venezuela.</p>
+            </div>
+            
+            <!-- Banners Carousel Showcase -->
+            <div class="media-carousel-container">
+                <h3 class="subsection-title">Nuestra Propuesta Visual</h3>
+                <div class="banners-carousel">
+                    <div class="carousel-track-container">
+                        <ul class="carousel-track">
+                            <li class="carousel-slide active">
+                                <img src="marketing/banner_pagos.jpg" alt="Cardakar Pagos Asegurados" class="carousel-image">
+                            </li>
+                            <li class="carousel-slide">
+                                <img src="marketing/banner_retornos.jpg" alt="Cardakar Cargas de Retorno" class="carousel-image">
+                            </li>
+                            <li class="carousel-slide">
+                                <img src="marketing/banner_combustible.jpg" alt="Cardakar Mapa de Combustible" class="carousel-image">
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Carousel Navigation Buttons -->
+                    <button class="carousel-button carousel-button--left" type="button" aria-label="Anterior">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="carousel-button carousel-button--right" type="button" aria-label="Siguiente">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <!-- Carousel Indicators (Dots) -->
+                    <div class="carousel-nav">
+                        <button class="carousel-indicator active" type="button" aria-label="Slide 1"></button>
+                        <button class="carousel-indicator" type="button" aria-label="Slide 2"></button>
+                        <button class="carousel-indicator" type="button" aria-label="Slide 3"></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Videos Grid (Mobile Mockups) -->
+            <div class="videos-grid-container">
+                <h3 class="subsection-title">Nuestra Comunidad (Videos en Ruta)</h3>
+                <div class="videos-grid">
+                    <!-- Video 1 -->
+                    <div class="video-card">
+                        <div class="video-phone-frame">
+                            <div class="video-phone-notch"></div>
+                            <video class="showcase-video" loop muted playsinline preload="metadata">
+                                <source src="marketing/CARDAKAR 1.mp4" type="video/mp4">
+                                Tu navegador no soporta reproducción de video.
+                            </video>
+                            <div class="video-overlay-play">
+                                <button class="play-btn-circle" type="button" aria-label="Reproducir">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>Ruta y Operación 1</h4>
+                            <p>Testimonio y operación en carretera nacional.</p>
+                        </div>
+                    </div>
+
+                    <!-- Video 2 -->
+                    <div class="video-card">
+                        <div class="video-phone-frame">
+                            <div class="video-phone-notch"></div>
+                            <video class="showcase-video" loop muted playsinline preload="metadata">
+                                <source src="marketing/CARDAKAR 2.mp4" type="video/mp4">
+                                Tu navegador no soporta reproducción de video.
+                            </video>
+                            <div class="video-overlay-play">
+                                <button class="play-btn-circle" type="button" aria-label="Reproducir">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>Ruta y Operación 2</h4>
+                            <p>Comunidad gandolera y fletes asegurados.</p>
+                        </div>
+                    </div>
+
+                    <!-- Video 3 -->
+                    <div class="video-card">
+                        <div class="video-phone-frame">
+                            <div class="video-phone-notch"></div>
+                            <video class="showcase-video" loop muted playsinline preload="metadata">
+                                <source src="marketing/CARDAKAR 3.mp4" type="video/mp4">
+                                Tu navegador no soporta reproducción de video.
+                            </video>
+                            <div class="video-overlay-play">
+                                <button class="play-btn-circle" type="button" aria-label="Reproducir">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>Ruta y Operación 3</h4>
+                            <p>Registro simple con el asistente virtual "Viajes".</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Multi-Step KYC Onboarding Form Section -->
+    <section id="onboarding-form-section" class="section kyc-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge">Registro Oficial</span>
+                <h2 class="section-title">Registro Rápido de <span class="highlight">Choferes</span></h2>
+                <p class="section-subtitle">Regístrate en menos de 30 segundos con tus datos de contacto básicos y luego decide si deseas certificar tu unidad.</p>
+            </div>
+                
+                <!-- Form Element -->
+                <form id="kyc-multi-step-form" class="kyc-form">
+                    <!-- STEP 1: PRE-REGISTRO / IDENTIDAD -->
+                    <div class="form-step-panel active" data-step="1">
+                        <h3>Paso 1: Datos de Identidad y Contacto</h3>
+                        <p class="panel-desc">Ingresa tu Cédula y verifícala para comenzar tu registro rápido.</p>
+                        
+                        <div class="form-group-grid">
+                            <div class="form-group">
+                                <label for="kyc-id-num">Cédula de Identidad / Pasaporte:</label>
+                                <div class="input-with-button">
+                                    <select id="kyc-id-type" style="width: 70px; height: 42px; box-sizing: border-box; flex-shrink: 0; background-color: #0c1322; border: 1px solid var(--border-color); color: var(--text-main); border-radius: 6px; padding: 0 8px; font-family: var(--font-heading); font-weight: 600; outline: none; cursor: pointer;">
+                                        <option value="V" selected>V</option>
+                                        <option value="E">E</option>
+                                        <option value="P">P</option>
+                                    </select>
+                                    <input type="text" id="kyc-id-num" placeholder="Ej. 12345678" required style="flex-grow: 1;">
+                                    <input type="hidden" id="kyc-id" name="national_id">
+                                    <button type="button" id="btn-verify-id" class="btn btn-primary btn-small">Verificar</button>
+                                </div>
+                                <div id="verify-id-feedback" class="feedback-msg"></div>
+                                <div id="verify-manual-bypass" style="margin-top: 8px; font-size: 0.85rem; display: block;">
+                                     <span style="color: var(--text-secondary);">¿No se autocompleta? </span>
+                                     <a href="#" id="link-bypass-verify" style="color: var(--color-orange); text-decoration: underline; font-weight: 500;">Ingresar nombre manualmente</a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="kyc-phone">Número de Teléfono (WhatsApp):</label>
+                                <input type="tel" id="kyc-phone" name="phone" placeholder="Ej. +58 412 1234567" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group-full">
+                            <label for="kyc-fullname">Nombre Completo:</label>
+                            <input type="text" id="kyc-fullname" name="fullname" placeholder="Escribe tu nombre completo" required>
+                        </div>
+
+                        <div class="form-group-full" style="margin-top: 16px;">
+                            <label for="kyc-email">Correo Electrónico:</label>
+                            <input type="email" id="kyc-email" name="email" placeholder="Ej. juan@gmail.com" required>
+                        </div>
+
+                        <div class="form-group-full" style="margin-top: 16px;">
+                            <label for="kyc-address">Dirección de Residencia:</label>
+                            <input type="text" id="kyc-address" name="address" placeholder="Ej. Av. Libertador, Caracas, Venezuela" required>
+                        </div>
+
+                        <div class="form-navigation" style="margin-top: 20px; display: flex; gap: 16px;">
+                            <button type="button" class="btn btn-primary next-step-btn" id="btn-step1-continue" style="width: 100%;">Siguiente Paso</button>
+                        </div>
+                    </div>
+                    
+                    <!-- STEP 2: LA UNIDAD Y TELEMETRÍA -->
+                    <div class="form-step-panel" data-step="2">
+                        <h3>Paso 2: Datos de la Unidad y Telemetría</h3>
+                        <p class="panel-desc">Especifica las características de tus vehículos y tu método de rastreo GPS.</p>
+                        
+                        <label>Vehículos que conduce (puede registrar varios):</label>
+                        <div id="vehicles-container" style="margin-top: 8px;">
+                            <div class="vehicle-row" data-index="0">
+                                <div class="form-group">
+                                    <label>Tipo de Vehículo:</label>
+                                    <select class="kyc-vehicle-type" name="vehicle_type[]" required>
+                                        <option value="" disabled selected>Selecciona una opción</option>
+                                        <option value="NPR">NPR / Tritón</option>
+                                        <option value="Gandola">Gandola (Chuto + Batea)</option>
+                                        <option value="Cava Cuarto">Cava Cuarto / Furgón</option>
+                                        <option value="Volqueta">Volqueta</option>
+                                        <option value="Plataforma">Plataforma</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Placa del Vehículo:</label>
+                                    <div class="input-with-delete">
+                                        <input type="text" class="kyc-plate" name="plate[]" placeholder="Ej. A12B34C" required>
+                                        <button type="button" class="btn-delete-vehicle" style="display: none;" title="Eliminar vehículo">
+                                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" id="btn-add-vehicle" class="btn btn-tertiary" style="margin-top: 10px; margin-bottom: 24px; padding: 8px 16px; border: 1px dashed var(--border-color); border-radius: 8px;">+ Agregar otro vehículo</button>
+                        
+                        <div class="form-group-full" style="border-top: 1px solid var(--border-color); padding-top: 24px;">
+                            <label>¿Cuenta con un dispositivo GPS físico homologable instalado en su camión?</label>
+                            <div class="telemetry-radio-container" style="margin-top: 8px;">
+                                <label class="radio-label">
+                                    <input type="radio" name="has_physical_gps" value="yes" id="gps-yes" checked>
+                                    <span>Sí, cuento con equipo GPS físico (homologado)</span>
+                                </label>
+                                <label class="radio-label" style="margin-top: 12px; display: block;">
+                                    <input type="radio" name="has_physical_gps" value="no" id="gps-no">
+                                    <span>No, usaré mi Smartphone como rastreador GPS</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Dynamic fields depending on GPS selection -->
+                        <div id="gps-physical-fields" class="form-group-grid" style="margin-top: 16px;">
+                            <div class="form-group">
+                                <label for="kyc-gps-imei">Código IMEI del GPS:</label>
+                                <input type="text" id="kyc-gps-imei" name="gps_imei" placeholder="Ej. 860123456789012" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="kyc-gps-provider">Proveedor del GPS / Plataforma:</label>
+                                <input type="text" id="kyc-gps-provider" name="gps_provider" placeholder="Ej. Satelital GPS" required>
+                            </div>
+                        </div>
+                        
+                        <div id="gps-smartphone-fields" class="form-group-full" style="display: none; margin-top: 16px;">
+                            <div class="alert-info-box" style="display: flex; gap: 12px; background-color: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.2); padding: 16px; border-radius: 8px;">
+                                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--color-primary-light); flex-shrink: 0; margin-top: 2px;">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                <p style="margin: 0; font-size: 0.8125rem; color: var(--text-muted);"><strong>Nota de Telemetría:</strong> Aceptas instalar la app de tracking autorizada de Cardakar y permitir el seguimiento GPS en segundo plano durante el viaje.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-secondary prev-step-btn">Atrás</button>
+                            <button type="submit" class="btn btn-primary btn-glow submit-form-btn">Pre-Registrar Unidad</button>
+                        </div>
+                    </div>
+                </form>
+                
+                <!-- Success State Overlay -->
+                <div class="form-success-overlay" id="form-success-overlay">
+                    <div class="success-card">
+                        <div class="success-checkmark">
+                            <svg viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                            </svg>
+                        </div>
+                        <h2>¡Pre-registro Exitoso!</h2>
+                        <p>Tus datos básicos han sido registrados en la plataforma de Cardakar Logistics.</p>
+                        
+                        <div class="success-details" style="background-color: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 16px 20px; border-radius: 8px; text-align: left; font-size: 0.875rem;">
+                            <p><strong>Estatus actual:</strong> Pre-Inscrito (Falta Documentación).</p>
+                            <p style="margin-top: 8px; color: var(--text-muted);">Para finalizar tu afiliación y poder recibir fletes, ve a la pestaña <strong>"Cédula Digital"</strong> en el menú superior para cargar tus documentos de verificación (Licencia, RCV, etc.).</p>
+                        </div>
+                        
+                        <button type="button" class="btn btn-secondary" id="close-success-btn">Entendido</button>
+                    </div>
+                </div>
+
+                <!-- Loading State Overlay -->
+                <div class="form-loading-overlay" id="form-loading-overlay">
+                    <div class="loading-spinner-container">
+                        <div class="loading-spinner"></div>
+                        <p>Procesando registro en el servidor...</p>
+                        <p class="loading-sub">Enviando carga útil JSON al Webhook de n8n</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Fuel Map Section (Teaser MVP) -->
+    <section id="combustible" class="section fuel-map-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge badge-accent">Teaser del Producto</span>
+                <h2 class="section-title">Mapa Comunitario de <span class="highlight">Combustible</span></h2>
+                <p class="section-subtitle">Inteligencia colectiva para combatir el cuello de botella del abastecimiento en Venezuela. Prueba el mapa interactivo a continuación.</p>
+            </div>
+            
+            <div class="map-dashboard">
+                <div class="map-sidebar">
+                    <div class="sidebar-header">
+                        <h3>Estaciones de Servicio</h3>
+                        <p>Selecciona un estado para ver reportes</p>
+                    </div>
+                    
+                    <div class="state-selector-container">
+                        <label for="state-select" class="form-label">Estado de Venezuela:</label>
+                        <select id="state-select" class="state-select-dropdown">
+                            <option value="caracas" selected>Distrito Capital (Caracas)</option>
+                            <option value="amazonas">Amazonas</option>
+                            <option value="anzoategui">Anzoátegui</option>
+                            <option value="apure">Apure</option>
+                            <option value="aragua">Aragua</option>
+                            <option value="barinas">Barinas</option>
+                            <option value="bolivar">Bolívar</option>
+                            <option value="carabobo">Carabobo</option>
+                            <option value="cojedes">Cojedes</option>
+                            <option value="delta_amacuro">Delta Amacuro</option>
+                            <option value="falcon">Falcón</option>
+                            <option value="guarico">Guárico</option>
+                            <option value="lara">Lara</option>
+                            <option value="merida">Mérida</option>
+                            <option value="miranda">Miranda</option>
+                            <option value="monagas">Monagas</option>
+                            <option value="nueva_esparta">Nueva Esparta</option>
+                            <option value="portuguesa">Portuguesa</option>
+                            <option value="sucre">Sucre</option>
+                            <option value="tachira">Táchira</option>
+                            <option value="trujillo">Trujillo</option>
+                            <option value="la_guaira">La Guaira (Vargas)</option>
+                            <option value="yaracuy">Yaracuy</option>
+                            <option value="zulia">Zulia</option>
+                        </select>
+                    </div>
+                    
+                    <div class="stations-list-title">Estaciones de Servicio en el Estado:</div>
+                    <div class="stations-list" id="stations-container">
+                        <!-- Stations will be dynamically rendered here via JS -->
+                    </div>
+
+                    <div class="report-box">
+                        <h4>Reportar Combustible</h4>
+                        <p class="report-box-sub">Ayuda a otros choferes reportando el estado en tiempo real</p>
+                        <form id="fuel-report-form">
+                            <div class="form-group">
+                                <label for="report-station">Estación:</label>
+                                <input type="text" id="report-station" placeholder="Ej. E/S El Condor" required>
+                            </div>
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label for="report-fuel">Tipo:</label>
+                                    <select id="report-fuel">
+                                        <option value="Diésel">Diésel</option>
+                                        <option value="Gasolina">Gasolina</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="report-status">Estado:</label>
+                                    <select id="report-status">
+                                        <option value="success">Disponible</option>
+                                        <option value="warning">Cola (Poco)</option>
+                                        <option value="danger">Sin Combustible</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-small">Enviar Reporte</button>
+                        </form>
+                        <div id="report-feedback" class="report-feedback-msg"></div>
+                    </div>
+                </div>
+                
+                <div class="map-visualizer">
+                    <!-- Virtual interactive map container using SVG -->
+                    <div class="map-placeholder">
+                        <svg class="venezuela-map-svg" viewBox="0 0 600 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background Map Grid -->
+                            <rect width="600" height="380" rx="12" fill="#0d131f"/>
+                            
+                            <!-- Venezuela outline representation (simplified geometric representation for beauty) -->
+                            <path d="M 50,150 L 120,80 Q 200,60 280,100 Q 320,80 380,90 Q 450,110 520,70 L 560,110 L 540,160 L 450,220 L 420,330 L 350,350 L 310,290 L 250,280 L 190,290 L 120,220 L 80,190 Z" fill="#152136" stroke="#1d2f4d" stroke-width="2" />
+                            
+                            <!-- Map Coordinates / Grid Lines -->
+                            <path d="M 0,100 L 600,100" stroke="#1d2f4d" stroke-width="1" stroke-dasharray="2,5" opacity="0.3"/>
+                            <path d="M 0,200 L 600,200" stroke="#1d2f4d" stroke-width="1" stroke-dasharray="2,5" opacity="0.3"/>
+                            <path d="M 0,300 L 600,300" stroke="#1d2f4d" stroke-width="1" stroke-dasharray="2,5" opacity="0.3"/>
+                            <path d="M 150,0 L 150,380" stroke="#1d2f4d" stroke-width="1" stroke-dasharray="2,5" opacity="0.3"/>
+                            <path d="M 300,0 L 300,380" stroke="#1d2f4d" stroke-width="1" stroke-dasharray="2,5" opacity="0.3"/>
+                            <path d="M 450,0 L 450,380" stroke="#1d2f4d" stroke-width="1" stroke-dasharray="2,5" opacity="0.3"/>
+                            
+                            <!-- Interactive Pins (Groups controlled by JS) -->
+                            <g id="map-pins">
+                                <!-- Pins will be injected dynamically or toggled via active state -->
+                            </g>
+                        </svg>
+                        
+                        <!-- HUD Info Overlay -->
+                        <div class="map-hud">
+                            <div class="hud-item">
+                                <span class="hud-label">Reportes Activos</span>
+                                <span class="hud-value" id="hud-active-reports">28</span>
+                            </div>
+                            <div class="hud-item">
+                                <span class="hud-label">Estado de Flota</span>
+                                <span class="hud-value success">Segura</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="map-info-banner">
+                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <p><strong>¿Cómo funciona la validación algorítmica?</strong> Cada reporte requiere que el GPS del chofer esté a menos de 50 metros de la gasolinera seleccionada y se cruza con las lecturas de otros 2 choferes para evitar falsos positivos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section id="faqs" class="section faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Preguntas <span class="highlight">Frecuentes</span></h2>
+                <p class="section-subtitle">Todo lo que necesitas saber para empezar a operar en la plataforma de Cardakar.</p>
+            </div>
+            
+            <div class="faq-container">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Cuáles son los requisitos para registrar mi camión?</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Necesitas tener tu cédula de identidad, licencia de conducir de 5ta categoría vigente, certificado médico de conducción y la póliza de seguro de Responsabilidad Civil (RCV) vigente del camión. Todo el registro se realiza vía WhatsApp.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Cómo y cuándo se me garantiza el pago del flete?</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>El pago de tu flete se realiza de manera garantizada y oportuna. El proceso de liquidación se activa inmediatamente después de que entregas el manifiesto de carga firmado y sellado por el destinatario, y nos envías la foto digital que certifique el envío del documento en físico a nuestra sede principal.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿El uso del mapa de combustible tiene algún costo?</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No, el mapa de combustible es 100% gratuito para todos los choferes verificados dentro de la red Cardakar. Funciona bajo un esquema comunitario: mientras más choferes reporten, más preciso será el servicio para todos.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Qué tipo de mercancía se transporta en Cardakar?</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Nos enfocamos en carga general B2B para industrias de consumo masivo, retail, alimentos, manufactura y construcción. Trabajamos con clientes corporativos de primer nivel que exigen altos estándares de puntualidad y seguridad.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>¿Qué ocurre si tengo un retraso por escasez de combustible?</span>
+                        <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sabemos los desafíos del mercado. Si el retraso se debe a fuerza mayor (como colas de combustible demostrables), debes reportarlo de inmediato a través de WhatsApp. El sistema validará la situación mediante GPS y se coordinará con la empresa cliente sin penalizar tu scoring de chofer.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo-container" style="height: 45px; display: flex; align-items: center; margin-bottom: 15px;">
+                        <!-- Logo SVG -->
+                        <svg class="logo-svg" viewBox="0 0 240 60" width="180" height="45" xmlns="http://www.w3.org/2000/svg">
+                            <g transform="translate(5, 5)">
+                                <!-- Letters (Blue) -->
+                                <path d="M 38,10 L 15,10 C 10,10 7,13 5,18 L 1,32 C -1,37 1,42 6,42 L 31,42 L 35,32 L 14,32 L 20,18 L 34,18 Z" fill="#1a508b" />
+                                <path d="M 41,10 L 65,10 C 72,10 77,14 75,21 L 72,31 C 70,38 64,42 57,42 L 32,42 Z M 44,32 L 54,32 C 58,32 60,30 61,27 L 63,20 C 64,17 62,16 59,16 L 49,16 Z" fill="#1a508b" />
+                                <!-- Letter K (Orange Arrow < ) -->
+                                <path d="M 98,10 L 86,26 L 98,42 L 85,42 L 74,26 L 85,10 Z" fill="#e07a2c" />
+                                <!-- Text below CDK -->
+                                <text x="2" y="52" fill="#daa520" font-family="'Outfit', sans-serif" font-size="7.5" font-weight="700" letter-spacing="1.2">INVERSIONES</text>
+                                <text x="73" y="52" fill="#1a508b" font-family="'Outfit', sans-serif" font-size="10" font-weight="800" letter-spacing="0.5">CARDA<tspan fill="#e07a2c">KAR</tspan> <tspan fill="#9ca3af" font-size="7">C.A.</tspan></text>
+                            </g>
+                        </svg>
+                        <img class="logo-img" src="" alt="Cardakar Logo" style="display: none; height: 45px; max-width: 180px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));">
+                    </div>
+                    <p class="footer-desc">Reactivando la arteria logística del país integrando tradición, tecnología y seguridad corporativa.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="#beneficios">Beneficios</a></li>
+                        <li><a href="#proceso">¿Cómo funciona?</a></li>
+                        <li><a href="#combustible">Combustible</a></li>
+                        <li><a href="#faqs">Preguntas Frecuentes</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contacto Oficina</h4>
+                    <p>Inversiones Cardakar C.A. - Logistics Tech Division</p>
+                    <p>Caracas, Venezuela</p>
+                    <p>Soporte: info@cardakar.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Inversiones Cardakar C.A. Todos los derechos reservados. Desarrollado bajo infraestructura FreightTech.</p>
+            </div>
+        </div>
+    </div> <!-- Close landing-view-wrapper -->
+
+    <!-- Fase B: Cédula Digital Wrapper -->
+    <div id="cedula-view-wrapper" class="view-panel" style="display: none;">
+        <section class="section kyc-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge">Fase B: Control de Acceso</span>
+                    <h2 class="section-title">Cédula Digital <span class="highlight">Cardakar</span></h2>
+                    <p class="section-subtitle">Vista móvil del carnet del transportista y simulación del sistema de control de acceso en planta.</p>
+                </div>
+                
+                <div class="cedula-dashboard-layout">
+                    <!-- Left: Carrier Portal / Document Upload -->
+                    <div class="cedula-controls">
+                        <div id="portal-login-section">
+                            <h3>Portal de Autogestión</h3>
+                            <p class="control-desc">Ingresa tu Cédula de Identidad para consultar tu estatus de afiliación o completar documentos.</p>
+                            <div class="form-group" style="margin-bottom: 16px; display: flex; flex-direction: column; gap: 8px;">
+                                <label for="portal-search-id-num">Cédula del Transportista / Pasaporte:</label>
+                                <div class="input-with-button">
+                                    <select id="portal-id-type" style="width: 70px; height: 42px; box-sizing: border-box; flex-shrink: 0; background-color: #0c1322; border: 1px solid var(--border-color); color: var(--text-main); border-radius: 6px; padding: 0 8px; font-family: var(--font-heading); font-weight: 600; outline: none; cursor: pointer;">
+                                        <option value="V" selected>V</option>
+                                        <option value="E">E</option>
+                                        <option value="P">P</option>
+                                    </select>
+                                    <input type="text" id="portal-search-id-num" placeholder="Ej. 13921227" style="flex-grow: 1;">
+                                    <input type="hidden" id="portal-search-id">
+                                    <button type="button" id="btn-portal-login" class="btn btn-primary btn-small">Ingresar</button>
+                                </div>
+                            </div>
+                            <div id="portal-login-feedback" class="feedback-msg"></div>
+                        </div>
+
+                        <div id="portal-profile-section" style="display: none;">
+                            <div class="profile-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
+                                <h3>Mi Perfil de Transportista</h3>
+                                <button type="button" id="btn-portal-logout" class="btn btn-tertiary" style="padding: 4px 10px; font-size: 0.75rem;">Salir</button>
+                            </div>
+                            
+                            <div class="status-alert-box" id="portal-status-box" style="margin-bottom: 24px; padding: 16px; border-radius: 8px; font-size: 0.875rem;">
+                                <!-- Will be styled based on status -->
+                            </div>
+
+                            <!-- Upload Documents Form (Visible only if Pre_Registered or Rejected) -->
+                            <form id="portal-upload-docs-form" style="display: none;">
+                                <h4 style="margin-bottom: 12px; font-family: var(--font-heading); color: var(--text-main);">Carga de Documentación de Afiliación (Requerido para Activar Cuenta)</h4>
+                                <p class="panel-desc">Sube imágenes legibles de tus soportes legales y fotos del camión. Todos los campos son obligatorios.</p>
+                                
+                                <div class="form-group-full" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+                                    <label for="portal-license-num">Número de Licencia de Conducir:</label>
+                                    <input type="text" id="portal-license-num" placeholder="Ej. 5-12345678" required style="width: 100%; background-color: #0c1322; border: 1px solid var(--border-color); color: var(--text-main); padding: 12px; border-radius: 8px;">
+                                </div>
+
+                                <div class="form-group-full" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+                                    <label for="portal-address">Dirección de Habitación (Comprobación de Residencia):</label>
+                                    <textarea id="portal-address" placeholder="Ingresa tu dirección exacta de habitación" required style="width: 100%; height: 80px; background-color: #0c1322; border: 1px solid var(--border-color); color: var(--text-main); padding: 12px; border-radius: 8px; font-family: var(--font-body); resize: vertical; outline: none; transition: var(--transition-fast);"></textarea>
+                                </div>
+
+                                <div class="form-group-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                                    <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+                                        <label>Foto de Cédula (Frontal):</label>
+                                        <div class="file-upload-wrapper">
+                                            <input type="file" id="file-portal-identity" accept="image/*,application/pdf" required>
+                                            <div class="file-upload-placeholder">
+                                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                                <span style="font-size: 0.75rem;">Cédula Frontal</span>
+                                            </div>
+                                            <div class="file-preview" id="preview-portal-identity"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+                                        <label>Selfie con Cédula (Verificación):</label>
+                                        <div class="file-upload-wrapper">
+                                            <input type="file" id="file-portal-selfie" accept="image/*" required>
+                                            <div class="file-upload-placeholder">
+                                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                                <span style="font-size: 0.75rem;">Selfie con Cédula</span>
+                                            </div>
+                                            <div class="file-preview" id="preview-portal-selfie"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                                    <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+                                        <label>Licencia de Conducir (5ta):</label>
+                                        <div class="file-upload-wrapper">
+                                            <input type="file" id="file-portal-license" accept="image/*,application/pdf" required>
+                                            <div class="file-upload-placeholder">
+                                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                                <span style="font-size: 0.75rem;">Licencia</span>
+                                            </div>
+                                            <div class="file-preview" id="preview-portal-license"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+                                        <label>Certificado Médico Vial:</label>
+                                        <div class="file-upload-wrapper">
+                                            <input type="file" id="file-portal-medical" accept="image/*,application/pdf" required>
+                                            <div class="file-upload-placeholder">
+                                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                                <span style="font-size: 0.75rem;">Cert. Médico</span>
+                                            </div>
+                                            <div class="file-preview" id="preview-portal-medical"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                                    <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+                                        <label>Póliza RCV:</label>
+                                        <div class="file-upload-wrapper">
+                                            <input type="file" id="file-portal-rcv" accept="image/*,application/pdf" required>
+                                            <div class="file-upload-placeholder">
+                                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                                <span style="font-size: 0.75rem;">Seguro RCV</span>
+                                            </div>
+                                            <div class="file-preview" id="preview-portal-rcv"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+                                        <label>Antecedentes Penales:</label>
+                                        <div class="file-upload-wrapper">
+                                            <input type="file" id="file-portal-criminal" accept="image/*,application/pdf" required>
+                                            <div class="file-upload-placeholder">
+                                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                                <span style="font-size: 0.75rem;">Antecedentes</span>
+                                            </div>
+                                            <div class="file-preview" id="preview-portal-criminal"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                                    <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+                                        <label>Título / Circulación:</label>
+                                        <div class="file-upload-wrapper">
+                                            <input type="file" id="file-portal-property" accept="image/*,application/pdf" required>
+                                            <div class="file-upload-placeholder">
+                                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                                <span style="font-size: 0.75rem;">Título Propiedad</span>
+                                            </div>
+                                            <div class="file-preview" id="preview-portal-property"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+                                        <label>Carga del RIF (Vigente):</label>
+                                        <div class="file-upload-wrapper">
+                                            <input type="file" id="file-portal-rif" accept="image/*,application/pdf" required>
+                                            <div class="file-upload-placeholder">
+                                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                                <span style="font-size: 0.75rem;">Documento RIF</span>
+                                            </div>
+                                            <div class="file-preview" id="preview-portal-rif"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                                    <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+                                        <label>Foto Fachada Casa (Constancia Visual):</label>
+                                        <div class="file-upload-wrapper">
+                                            <input type="file" id="file-portal-house" accept="image/*" required>
+                                            <div class="file-upload-placeholder">
+                                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                                <span style="font-size: 0.75rem;">Foto Casa Fachada</span>
+                                            </div>
+                                            <div class="file-preview" id="preview-portal-house"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="display: flex; opacity: 0; pointer-events: none;">
+                                        <!-- Empty element to balance the grid -->
+                                    </div>
+                                </div>
+
+                                <input type="hidden" id="portal-latitude" name="latitude">
+                                <input type="hidden" id="portal-longitude" name="longitude">
+
+                                <div class="form-group-full" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px;">
+                                    <label>Inspección del Camión (4 fotos: Frontal, Laterales, Plataforma):</label>
+                                    <div class="file-upload-wrapper">
+                                        <input type="file" id="file-portal-inspection" accept="image/*" multiple required>
+                                        <div class="file-upload-placeholder">
+                                            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                            <span>Subir fotos de inspección (múltiples)</span>
+                                        </div>
+                                        <div class="file-preview" id="preview-portal-inspection"></div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-glow" style="margin-top: 15px; width: 100%;">Enviar Documentos a Auditoría</button>
+                            </form>
+                            
+                            <!-- Simulation shortcuts for demo convenience -->
+                            <div class="api-debug-box" style="margin-top: 30px; border-top: 1px dashed var(--border-color); padding-top: 20px;">
+                                <h4>Consola de Depuración (Admin Demo)</h4>
+                                <p class="control-desc" style="margin-bottom: 12px;">Fuerza el estatus de este chofer localmente para ver cómo responde el escaner de planta:</p>
+                                <div class="control-actions" style="display: flex; gap: 10px;">
+                                    <button type="button" class="btn btn-primary btn-small status-toggle-btn" data-status="activo" style="padding: 6px 12px; font-size: 0.75rem;">Set Activo</button>
+                                    <button type="button" class="btn btn-secondary btn-small status-toggle-btn" data-status="suspendido" style="padding: 6px 12px; font-size: 0.75rem; border-color: var(--color-danger); color: var(--color-danger);">Set Suspendido</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Phone Mockup showing the ID Card -->
+                    <div class="phone-mockup-container">
+                        <div class="phone-mockup">
+                            <div class="phone-screen" id="driver-card-screen">
+                                <!-- Top Bar -->
+                                <div class="phone-top-bar">
+                                    <span class="phone-time">12:42</span>
+                                    <div class="phone-notifs">
+                                        <span>5G</span>
+                                        <span>94%</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Card Header -->
+                                <div class="card-mobile-header">
+                                    <div class="logo-container" style="height: 32px; display: flex; align-items: center; justify-content: center; width: 100%;">
+                                        <svg class="logo-svg" viewBox="0 0 240 60" width="130" height="32" xmlns="http://www.w3.org/2000/svg">
+                                            <g transform="translate(5, 5)">
+                                                <path d="M 38,10 L 15,10 C 10,10 7,13 5,18 L 1,32 C -1,37 1,42 6,42 L 31,42 L 35,32 L 14,32 L 20,18 L 34,18 Z" fill="#ffffff" />
+                                                <path d="M 41,10 L 65,10 C 72,10 77,14 75,21 L 72,31 C 70,38 64,42 57,42 L 32,42 Z M 44,32 L 54,32 C 58,32 60,30 61,27 L 63,20 C 64,17 62,16 59,16 L 49,16 Z" fill="#ffffff" />
+                                                <path d="M 98,10 L 86,26 L 98,42 L 85,42 L 74,26 L 85,10 Z" fill="#e07a2c" />
+                                                <text x="2" y="52" fill="#daa520" font-family="'Outfit', sans-serif" font-size="7.5" font-weight="700" letter-spacing="1.2">INVERSIONES</text>
+                                                <text x="73" y="52" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="10" font-weight="800" letter-spacing="0.5">CARDA<tspan fill="#e07a2c">KAR</tspan></text>
+                                            </g>
+                                        </svg>
+                                        <img class="logo-img" src="" alt="Cardakar Logo" style="display: none; height: 32px; max-width: 130px; object-fit: contain;">
+                                    </div>
+                                    <span class="card-title-label">SISTEMA NACIONAL DE TRANSPORTE PESADO</span>
+                                    <div class="card-serial" id="card-driver-serial">CDK-V12345678-2026</div>
+                                </div>
+                                
+                                <!-- Card Content -->
+                                <div class="card-mobile-content">
+                                    <!-- Smart Chip and Sello de seguridad -->
+                                    <div class="card-security-assets" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0 10px; margin-bottom: 8px;">
+                                        <div class="card-smart-chip" style="width: 32px; height: 24px; background: linear-gradient(135deg, #ffd700, #daa520); border-radius: 4px; box-shadow: inset 0 1px 3px rgba(255,255,255,0.4), 0 1px 2px rgba(0,0,0,0.3); position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.15);">
+                                            <div style="position: absolute; top: 0; left: 10px; width: 1px; height: 100%; background: rgba(0,0,0,0.2);"></div>
+                                            <div style="position: absolute; top: 0; left: 21px; width: 1px; height: 100%; background: rgba(0,0,0,0.2);"></div>
+                                            <div style="position: absolute; top: 12px; left: 0; width: 100%; height: 1px; background: rgba(0,0,0,0.2);"></div>
+                                            <div style="position: absolute; top: 6px; left: 6px; width: 20px; height: 12px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.15); background: transparent;"></div>
+                                        </div>
+                                        <div class="card-security-seal" style="border: 1px dashed rgba(224, 122, 44, 0.4); border-radius: 50%; padding: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.5rem; font-weight: bold; color: rgba(224, 122, 44, 0.6); text-transform: uppercase; letter-spacing: 0.5px; width: 42px; height: 42px; text-align: center; line-height: 1.1; font-family: var(--font-heading); box-shadow: 0 0 5px rgba(224, 122, 44, 0.05);">
+                                            CDK<br>VERIF
+                                        </div>
+                                    </div>
+
+                                    <div class="driver-photo-container">
+                                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256" alt="Driver" class="driver-photo" id="card-driver-photo">
+                                        <div class="access-dot-badge" id="card-access-dot"></div>
+                                        <div class="certified-stamp-badge" style="position: absolute; bottom: -8px; right: -8px; background: #e07a2c; color: #000; font-size: 0.6rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; border: 1.5px solid #080d1a; box-shadow: 0 2px 4px rgba(0,0,0,0.3); text-transform: uppercase; font-family: var(--font-heading);">B2B Certificado</div>
+                                    </div>
+                                    
+                                    <div class="driver-details">
+                                        <h3 id="card-driver-name" style="margin-bottom: 8px; font-size: 1.15rem; font-weight: 700; color: #fff;">Juan Carlos Pérez</h3>
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: left;">
+                                            <p class="driver-meta">Cédula:<br><strong id="card-driver-id">V-12.345.678</strong></p>
+                                            <p class="driver-meta">Licencia:<br><strong id="card-driver-license">5ta (5-12345678)</strong></p>
+                                            <p class="driver-meta">Vehículo:<br><strong id="card-driver-vehicle">Gandola (Mack)</strong></p>
+                                            <p class="driver-meta">Placa:<br><strong id="card-driver-plate">A12B34C</strong></p>
+                                            <p class="driver-meta">Emisión:<br><strong id="card-driver-issued">12/06/2026</strong></p>
+                                            <p class="driver-meta">Vence:<br><strong id="card-driver-expires">12/06/2027</strong></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- QR & Barcode Section -->
+                                    <div style="display: flex; gap: 16px; align-items: center; justify-content: center; width: 100%; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; margin-top: 8px;">
+                                        <!-- QR Code Mockup -->
+                                        <div class="qr-code-box" style="width: 55px; height: 55px; padding: 4px; background: #fff; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
+                                            <svg viewBox="0 0 100 100" class="qr-svg" style="color: #000; width: 100%; height: 100%;">
+                                                <rect x="0" y="0" width="100" height="100" fill="none"/>
+                                                <rect x="5" y="5" width="25" height="25" fill="currentColor"/>
+                                                <rect x="10" y="10" width="15" height="15" fill="#ffffff"/>
+                                                <rect x="12" y="12" width="11" height="11" fill="currentColor"/>
+                                                
+                                                <rect x="70" y="5" width="25" height="25" fill="currentColor"/>
+                                                <rect x="75" y="10" width="15" height="15" fill="#ffffff"/>
+                                                <rect x="77" y="12" width="11" height="11" fill="currentColor"/>
+                                                
+                                                <rect x="5" y="70" width="25" height="25" fill="currentColor"/>
+                                                <rect x="10" y="75" width="15" height="15" fill="#ffffff"/>
+                                                <rect x="12" y="77" width="11" height="11" fill="currentColor"/>
+                                                
+                                                <rect x="40" y="5" width="10" height="10" fill="currentColor"/>
+                                                <rect x="55" y="15" width="10" height="20" fill="currentColor"/>
+                                                <rect x="40" y="25" width="20" height="10" fill="currentColor"/>
+                                                <rect x="45" y="45" width="15" height="15" fill="currentColor"/>
+                                                <rect x="75" y="45" width="10" height="10" fill="currentColor"/>
+                                                <rect x="70" y="60" width="25" height="10" fill="currentColor"/>
+                                                <rect x="40" y="75" width="20" height="20" fill="currentColor"/>
+                                                <rect x="70" y="80" width="10" height="15" fill="currentColor"/>
+                                                <rect x="85" y="85" width="10" height="10" fill="currentColor"/>
+                                            </svg>
+                                        </div>
+                                        
+                                        <!-- Barcode Mockup -->
+                                        <div class="barcode-box" style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;">
+                                            <div style="display: flex; width: 100%; height: 35px; background: transparent; gap: 2px;">
+                                                <div style="background-color: var(--text-main); flex-grow: 1; height: 100%; width: 2px;"></div>
+                                                <div style="background-color: var(--text-main); flex-grow: 2; height: 100%; width: 4px;"></div>
+                                                <div style="background-color: transparent; flex-grow: 1; height: 100%; width: 2px;"></div>
+                                                <div style="background-color: var(--text-main); flex-grow: 1; height: 100%; width: 2px;"></div>
+                                                <div style="background-color: var(--text-main); flex-grow: 3; height: 100%; width: 6px;"></div>
+                                                <div style="background-color: transparent; flex-grow: 2; height: 100%; width: 4px;"></div>
+                                                <div style="background-color: var(--text-main); flex-grow: 1; height: 100%; width: 2px;"></div>
+                                                <div style="background-color: var(--text-main); flex-grow: 2; height: 100%; width: 4px;"></div>
+                                                <div style="background-color: transparent; flex-grow: 1; height: 100%; width: 2px;"></div>
+                                                <div style="background-color: var(--text-main); flex-grow: 1; height: 100%; width: 2px;"></div>
+                                                <div style="background-color: var(--text-main); flex-grow: 2; height: 100%; width: 4px;"></div>
+                                            </div>
+                                            <span style="font-family: monospace; font-size: 0.6rem; color: var(--text-muted); letter-spacing: 1.5px;">CDK-78419200</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Access Status Display -->
+                                <div class="access-status-indicator" id="access-status-indicator">
+                                    <div class="status-icon-box" id="status-icon-box"></div>
+                                    <h4 id="access-status-title">Acceso Autorizado</h4>
+                                    <p id="access-status-desc">Unidad certificada y activa en la base de datos de Cardakar.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Fase C: Portal B2B Wrapper -->
+    <div id="portal-view-wrapper" class="view-panel" style="display: none;">
+        <section class="section kyc-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge badge-accent">Fase C: Monitoreo Activo</span>
+                    <h2 class="section-title">Portal de Clientes <span class="highlight">B2B Visibilidad</span></h2>
+                    <p class="section-subtitle">Consola de telemetría corporativa. Monitorea tu carga en tiempo real con geocercas y gestión de zonas ciegas.</p>
+                </div>
+                
+                <div class="b2b-dashboard-layout">
+                    <!-- Sidebar: Trip information and Telemetry controls -->
+                    <div class="b2b-sidebar">
+                        <!-- Selector de Choferes de Base de Datos -->
+                        <div class="b2b-driver-selector-box" style="background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);">
+                            <h4 style="font-family: var(--font-heading); font-size: 1.0625rem; font-weight: 700; margin-bottom: 12px; color: var(--text-main);">Seleccionar Unidad en Ruta</h4>
+                            <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+                                <label for="b2b-driver-select" style="font-size: 0.75rem; color: var(--text-muted);">Transportistas Certificados (Base de Datos):</label>
+                                <select id="b2b-driver-select" style="width: 100%; background-color: #0c1322; border: 1px solid var(--border-color); color: var(--text-main); padding: 10px; border-radius: 8px; font-family: var(--font-body); outline: none; cursor: pointer;">
+                                    <option value="default" selected>Cargando transportistas...</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="trip-card">
+                            <div class="trip-header">
+                                <h3 id="b2b-trip-title">Viaje #V-9842</h3>
+                                <span class="trip-tag" id="trip-tag-status">En_Ruta</span>
+                            </div>
+                            
+                            <div class="trip-info-list">
+                                <div class="info-row"><span>Cliente:</span><strong id="b2b-client-name">Distribuidora Polar C.A.</strong></div>
+                                <div class="info-row"><span>Ruta:</span><strong id="b2b-route-name">Caracas (D.C.) &rarr; Barquisimeto (Lara)</strong></div>
+                                <div class="info-row"><span>Unidad:</span><strong id="b2b-vehicle-name">Chuto Mack (A12B34C)</strong></div>
+                                <div class="info-row"><span>Chofer:</span><strong id="b2b-driver-name">Juan Carlos Pérez</strong></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Telemetry Simulator Panel -->
+                        <div class="telemetry-controls-box">
+                            <h4>Consola de Simulación</h4>
+                            <p class="control-desc">Pon a prueba el motor de telemetría, las reglas de geocercas de privacidad y el almacenamiento offline (Store-and-Forward).</p>
+                            
+                            <div class="control-field">
+                                <label for="sim-trip-status">Estado del Viaje (Geocerca):</label>
+                                <select id="sim-trip-status">
+                                    <option value="En_Ruta" selected>En_Ruta (Telemetría Activa)</option>
+                                    <option value="Entregado">Entregado (Se apaga telemetría por Privacidad)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-field-checkbox">
+                                <input type="checkbox" id="sim-offline-zone">
+                                <label for="sim-offline-zone">Simular Zona sin Cobertura 4G (Store-and-Forward)</label>
+                            </div>
+                            
+                            <div id="offline-buffer-status" class="offline-buffer-status">
+                                <div class="buffer-dot"></div>
+                                <span>Buffer local: <strong id="buffer-count">0</strong> coordenadas guardadas</span>
+                            </div>
+
+                            <!-- Botón de manifiesto digital de entrega (ERP) -->
+                            <div style="border-top: 1px solid var(--border-color); margin-top: 16px; padding-top: 16px;">
+                                <button type="button" id="btn-generate-manifest" class="btn btn-primary btn-glow" style="width: 100%; display: flex; gap: 8px; align-items: center; justify-content: center; padding: 10px;">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                                    </svg>
+                                    <span>Generar Manifiesto ERP (JSON)</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Live coordinate stream log -->
+                        <div class="coord-stream-box">
+                            <h4>Log de Telemetría (GPS)</h4>
+                            <div class="coord-log-list" id="coord-log-stream">
+                                <div class="log-item system">Esperando señal GPS...</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Main: Leaflet Map Visualizer -->
+                    <div class="b2b-map-container">
+                        <div id="leaflet-map"></div>
+                        
+                        <div class="map-hud-b2b">
+                            <div class="hud-item-b2b">
+                                <span class="hud-lbl">Velocidad</span>
+                                <span class="hud-val" id="hud-speed">0 km/h</span>
+                            </div>
+                            <div class="hud-item-b2b">
+                                <span class="hud-lbl">Último Reporte</span>
+                                <span class="hud-val" id="hud-last-gps">Hace un momento</span>
+                            </div>
+                            <div class="hud-item-b2b">
+                                <span class="hud-lbl">Conexión</span>
+                                <span class="hud-val success" id="hud-conn-status">ONLINE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Leaflet JS Map Script -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!-- JS Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
+     

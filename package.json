@@ -1,0 +1,17 @@
+{
+  "name": "cardakar-landing-page",
+  "version": "1.0.0",
+  "description": "Cardakar Logistics Phase 1 Landing Page & Onboarding campaign",
+  "main": "serve.js",
+  "scripts": {
+    "start": "node serve.js"
+  },
+  "keywords": [
+    "cardakar",
+    "logistics",
+    "landing-page",
+    "onboarding"
+  ],
+  "author": "Cardakar Logistics Tech Division",
+  "license": "ISC"
+}
