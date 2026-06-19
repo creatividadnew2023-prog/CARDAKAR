@@ -199,6 +199,24 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    // API: Register empresa (company with fleet)
+    if (req.url === '/api/register-empresa' && req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => { body += chunk; });
+        req.on('end', () => {
+            try {
+                const payload = JSON.parse(body);
+                console.log('[register-empresa]', payload.rif, payload.nombre_empresa);
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: true, tipo: 'empresa', rif: payload.rif }));
+            } catch (err) {
+                res.writeHead(400, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: false, error: err.message }));
+            }
+        });
+        return;
+    }
+
     // API: Register basic driver details
     if (req.url === '/api/register-basic' && req.method === 'POST') {
         let body = '';
