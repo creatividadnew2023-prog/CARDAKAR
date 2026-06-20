@@ -2202,7 +2202,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-            } catch (_) {}
+            } catch (_) { /* silent */ }
+
+            // POST to n8n — Es Empresa? node routes the payload
+            const n8nWebhook = 'https://chatbot-isp-n8n.ha4i6p.easypanel.host/webhook/cardakar-kyc-intake';
+            try {
+                await Promise.race([
+                    fetch(n8nWebhook, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    }),
+                    new Promise((_, rej) => setTimeout(() => rej(new Error('Timeout')), 8000))
+                ]);
+            } catch (err) {
+                console.log('%c[Webhook Empresa] n8n error ignored:', 'color:#94a3b8;', err.message);
+            }
 
             if (loadingOverlayEl) loadingOverlayEl.style.display = 'none';
             const titleEl = document.getElementById('success-title');
